@@ -1,0 +1,14 @@
+2026-06-02 08:01:12 INFO  Service started: payment-service v2.3.1
+2026-06-02 08:15:33 INFO  Processing transaction TXN-9921 amount=$450.00
+2026-06-02 08:45:01 WARN  Response time degraded: 1200ms (threshold: 800ms)
+2026-06-02 09:00:15 ERROR Database connection pool exhausted: max=20 active=20
+2026-06-02 09:00:16 ERROR Failed to process TXN-9934: timeout after 30s
+2026-06-02 09:00:18 ERROR Failed to process TXN-9935: timeout after 30s
+2026-06-02 09:00:21 ERROR Failed to process TXN-9936: timeout after 30s
+2026-06-02 09:01:05 CRIT  Payment service DOWN — health check failed
+2026-06-02 09:01:06 ERROR Downstream alert: checkout-service cannot reach payment-service
+2026-06-02 09:01:10 ERROR Downstream alert: order-service cannot reach payment-service
+2026-06-02 09:02:00 INFO  DB admin manually killed 5 idle connections
+2026-06-02 09:02:45 INFO  Connection pool recovering: active=12
+2026-06-02 09:03:30 INFO  Payment service UP — health check passed
+2026-06-02 09:03:31 INFO  Processing resumed TXN-9937 amount=$230.00

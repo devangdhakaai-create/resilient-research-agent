@@ -1,0 +1,46 @@
+{
+  "runbooks": [
+    {
+      "id": "RB-001",
+      "title": "Database Connection Pool Exhausted",
+      "triggers": ["connection pool", "pool exhausted", "max connections"],
+      "steps": [
+        "1. Check active connections: SELECT count(*) FROM pg_stat_activity",
+        "2. Kill idle connections older than 5 min",
+        "3. Increase pool size in config: DB_POOL_MAX=30",
+        "4. Restart connection pooler (PgBouncer)",
+        "5. Monitor recovery for 5 minutes"
+      ],
+      "severity": "CRITICAL",
+      "estimated_resolution": "10-15 minutes"
+    },
+    {
+      "id": "RB-002",
+      "title": "Service Timeout / High Latency",
+      "triggers": ["timeout", "response time", "latency", "slow"],
+      "steps": [
+        "1. Check CPU and memory usage on affected service",
+        "2. Review recent deployments in last 2 hours",
+        "3. Check downstream dependencies health",
+        "4. Scale up pods if CPU > 80%",
+        "5. Rollback if issue started after deployment"
+      ],
+      "severity": "HIGH",
+      "estimated_resolution": "5-10 minutes"
+    },
+    {
+      "id": "RB-003",
+      "title": "Cascading Service Failure",
+      "triggers": ["downstream", "cannot reach", "service down", "health check failed"],
+      "steps": [
+        "1. Identify root cause service (first failure in logs)",
+        "2. Isolate affected service with circuit breaker",
+        "3. Notify dependent teams via PagerDuty",
+        "4. Fix root cause first, then restore dependents",
+        "5. Verify all downstream services recovered"
+      ],
+      "severity": "CRITICAL",
+      "estimated_resolution": "15-30 minutes"
+    }
+  ]
+}
